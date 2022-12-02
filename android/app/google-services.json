@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "374945143785",
+    "project_id": "shopapp-getx-firebase",
+    "storage_bucket": "shopapp-getx-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374945143785:android:140a70eb42949a53938978",
+        "android_client_info": {
+          "package_name": "com.example.shop_getx_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374945143785-vcmntrgaa2ro1uagdjmpghffun82kvqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvJA5Dd0rzYngIeiw8aP_xxoD7-z6zitU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374945143785-vcmntrgaa2ro1uagdjmpghffun82kvqk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "374945143785-9od66eg96kumhgh7oqt3rsaulul9k6ad.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.shopGetxFirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
