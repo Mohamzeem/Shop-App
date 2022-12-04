@@ -132,12 +132,14 @@ class DetailsScreen extends StatelessWidget {
                         ],
                       ),
                       GetBuilder<CartController>(
+                        init: CartController(),
                         builder: ((controller) => CustomElevatedButton(
                               onPressed: () async =>
                                   await controller.addProduct(CartProductModel(
                                 image: model.image,
                                 name: model.name,
                                 price: model.price,
+                                productId: model.productId,
                                 quantity: 1,
                               )),
                               text: 'ADD',

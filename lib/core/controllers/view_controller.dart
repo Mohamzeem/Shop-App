@@ -88,7 +88,7 @@ class ViewController extends GetxController {
   ].obs;
   List<Widget> screens = [
     const ExploreScreen(),
-    CartScreen(),
+    const CartScreen(),
     const AccountScreen(),
   ].obs;
 

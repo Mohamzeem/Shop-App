@@ -10,23 +10,57 @@ class CartController extends GetxController {
   List<CartProductModel> _list = [];
   List<CartProductModel> get cartProductModel => _list;
 
+  double _totalPrice = 0.0;
+  double get totalPrice => _totalPrice;
+
   var dbHelper = CartDatabase.db;
+
   CartController() {
     getAllProducts();
   }
 
-  addProduct(CartProductModel cartProductModel) async {
-    var dbHelper = CartDatabase.db;
-    await dbHelper.insert(cartProductModel);
-    update();
-  }
-
   getAllProducts() async {
     _valueNotifier.value = true;
-    var dbHelper = CartDatabase.db;
     _list = await dbHelper.addAllProducts();
     print('_list.length is =  ${_list.length}');
     _valueNotifier.value = false;
+    getTotalPrice();
+    update();
+  }
+
+  getTotalPrice() {
+    for (var i = 0; i < _list.length; i++) {
+      _totalPrice += (double.parse(_list[i].price!) * _list[i].quantity!);
+      print(_totalPrice);
+      update();
+    }
+  }
+
+  addProduct(CartProductModel cartProductModel) async {
+    for (int i = 0; i < _list.length; i++) {
+      if (_list[i].productId == cartProductModel.productId) {
+        return;
+      }
+    }
+    await dbHelper.insertProduct(cartProductModel);
+    _list.add(cartProductModel);
+    _totalPrice +=
+        (double.parse(cartProductModel.price!) * cartProductModel.quantity!);
+    update();
+  }
+
+  increaseQuantity(int index) async {
+    _list[index].quantity = _list[index].quantity! + 1;
+    _totalPrice += double.parse(_list[index].price!);
+    await dbHelper.updateProduct(_list[index]);
+    update();
+  }
+
+  decreaseQuantity(int index) async {
+    _list[index].quantity = _list[index].quantity! - 1;
+    _totalPrice -= double.parse(_list[index].price!);
+    await dbHelper.updateProduct(_list[index]);
+
     update();
   }
 }

@@ -1,14 +1,10 @@
 // ignore_for_file: avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_getx_firebase/core/services/firestore_user_services.dart';
 import 'package:shop_getx_firebase/model/user_model.dart';
-import 'package:shop_getx_firebase/view/navigation_screens/screens/account_page.dart';
-import 'package:shop_getx_firebase/view/navigation_screens/screens/cart_page.dart';
-import 'package:shop_getx_firebase/view/navigation_screens/screens/explore_page.dart';
 import 'package:shop_getx_firebase/view/welcome_screen/welcome_screen.dart';
 import '../../consts/colors.dart';
 import '../../view/navigation_screens/screens/Control_screen.dart';
@@ -106,12 +102,6 @@ class AuthController extends GetxController {
     } catch (e) {
       snackBar('Error!!', e.toString());
     }
-  }
-
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-    Get.offAll(() => const WelcomeScreen());
-    print('Sign Out Successfully');
   }
 
   void saveUser(UserCredential user) async {

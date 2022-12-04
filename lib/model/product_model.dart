@@ -3,16 +3,16 @@ import 'package:flutter/animation.dart';
 import 'package:shop_getx_firebase/consts/colors.dart';
 
 class ProductModel {
-  String? image, name, description, price, size;
+  String? image, name, description, price, size, productId;
   Color? color;
-  ProductModel({
-    this.image,
-    this.name,
-    this.description,
-    this.price,
-    this.size,
-    this.color,
-  });
+  ProductModel(
+      {this.image,
+      this.name,
+      this.description,
+      this.price,
+      this.size,
+      this.color,
+      this.productId});
 
   ProductModel.fromJson(Map<dynamic, dynamic>? map) {
     if (map == null) {
@@ -23,6 +23,7 @@ class ProductModel {
     description = map['description'] ?? '';
     price = map['price'] ?? '';
     size = map['size'] ?? '';
+    productId = map['productId'] ?? '';
     color = HexColor.fromHex(map['color']);
   }
   toJson() {
@@ -33,6 +34,7 @@ class ProductModel {
       'price': price,
       'size': size,
       'color': color,
+      'productId': productId,
     };
   }
 }

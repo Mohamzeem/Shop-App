@@ -27,12 +27,12 @@ class CartDatabase {
       ${CartConstants.columnName} TEXT NOT NULL,
       ${CartConstants.columnImage} TEXT NOT NULL,
       ${CartConstants.columnPrice} TEXT NOT NULL,
+      ${CartConstants.columnProductId} TEXT NOT NULL,
       ${CartConstants.columnQuantity} INTEGER NOT NULL
       )
       ''');
     });
   }
-  // ${CartConstants.columnProductId} TEXT NOT NULL,
 
   Future<List<CartProductModel>> addAllProducts() async {
     var dbClient = await database;
@@ -43,12 +43,19 @@ class CartDatabase {
     return list;
   }
 
-  insert(CartProductModel model) async {
+  insertProduct(CartProductModel model) async {
     var dbClient = await database;
     await dbClient.insert(
       CartConstants.tableCartProduct,
       model.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+  }
+
+  updateProduct(CartProductModel model) async {
+    var dbClient = await database;
+    await dbClient.update(CartConstants.tableCartProduct, model.toJson(),
+        where: '${CartConstants.columnProductId}=?',
+        whereArgs: [model.productId]);
   }
 }

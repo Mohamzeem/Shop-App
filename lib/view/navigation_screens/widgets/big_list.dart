@@ -29,45 +29,51 @@ class BigList extends StatelessWidget {
                     onTap: () => Get.to(() => DetailsScreen(
                           model: controller.productModel[index],
                         )),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          decoration:
-                              BoxDecoration(color: Colors.grey.shade100),
-                          child: Image.network(
-                              controller.productModel[index].image!),
-                        ),
-                        const CustomSizedBox(
-                          height: 0.02,
-                          width: 0,
-                        ),
-                        CustomText(
-                            text: controller.productModel[index].name!,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: kBlack),
-                        const CustomSizedBox(
-                          height: 0.005,
-                          width: 0,
-                        ),
-                        CustomText(
-                            text: controller.productModel[index].description!,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.grey.shade700),
-                        const CustomSizedBox(
-                          height: 0.01,
-                          width: 0,
-                        ),
-                        CustomText(
-                            text: '${controller.productModel[index].price!} \$',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: mainColor),
-                      ],
+                    child: CustomSizedBox(
+                      height: 0.3,
+                      width: 0.4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            decoration:
+                                BoxDecoration(color: Colors.grey.shade100),
+                            child: Image.network(
+                                controller.productModel[index].image!),
+                          ),
+                          const CustomSizedBox(
+                            height: 0.02,
+                            width: 0,
+                          ),
+                          CustomText(
+                              text: controller.productModel[index].name!,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              color: kBlack),
+                          const CustomSizedBox(
+                            height: 0.005,
+                            width: 0,
+                          ),
+                          CustomText(
+                              text: controller.productModel[index].description!,
+                              maxLines: 1,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.grey.shade700),
+                          const CustomSizedBox(
+                            height: 0.01,
+                            width: 0,
+                          ),
+                          CustomText(
+                              text:
+                                  '${controller.productModel[index].price!} \$',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: mainColor),
+                        ],
+                      ),
                     ),
                   );
                 },

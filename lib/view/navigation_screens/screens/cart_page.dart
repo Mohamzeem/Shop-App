@@ -4,15 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shop_getx_firebase/consts/colors.dart';
 import 'package:shop_getx_firebase/core/controllers/cart_controller.dart';
-import 'package:shop_getx_firebase/model/cart_product_model.dart';
 import 'package:shop_getx_firebase/view/widgets/custom_elevated_button.dart';
 import 'package:shop_getx_firebase/view/widgets/custom_text.dart';
 import '../../widgets/custom_sized_box.dart';
 
 // ignore: must_be_immutable
 class CartScreen extends StatelessWidget {
-  CartScreen({super.key});
-
+  const CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -83,20 +81,29 @@ class CartScreen extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 IconButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    controller.increaseQuantity(
+                                                        index);
+                                                  },
                                                   icon: Icon(
                                                     Icons.add,
                                                     size: 20.r,
                                                   ),
                                                 ),
-                                                const CustomText(
-                                                  text: '2',
+                                                CustomText(
+                                                  text: controller
+                                                      .cartProductModel[index]
+                                                      .quantity!
+                                                      .toString(),
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
                                                   color: kBlack,
                                                 ),
                                                 IconButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    controller.decreaseQuantity(
+                                                        index);
+                                                  },
                                                   icon: Icon(
                                                     Icons.remove,
                                                     size: 20.r,
@@ -125,15 +132,15 @@ class CartScreen extends StatelessWidget {
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              CustomText(
+                            children: [
+                              const CustomText(
                                   text: "TOTAL",
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                   color: kGrey),
-                              CustomSizedBox(height: 0.008, width: 0.008),
+                              const CustomSizedBox(height: 0.008, width: 0.008),
                               CustomText(
-                                  text: "\$ 1800",
+                                  text: "\$ ${controller.totalPrice}",
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                   color: mainColor),

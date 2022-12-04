@@ -16,6 +16,7 @@ class ExploreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DataController>(
+      init: DataController(),
       builder: ((controller) => controller.isLoading!
           ? const CustomCircleIndicator()
           : Scaffold(
