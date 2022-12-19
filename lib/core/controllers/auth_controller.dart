@@ -4,6 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_getx_firebase/core/services/firestore_user_services.dart';
+import 'package:shop_getx_firebase/helper/local_storage_data.dart';
 import 'package:shop_getx_firebase/model/user_model.dart';
 import 'package:shop_getx_firebase/view/welcome_screen/welcome_screen.dart';
 import '../../consts/colors.dart';
@@ -15,6 +16,7 @@ class AuthController extends GetxController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final FacebookAuth _facebookAuth = FacebookAuth.instance;
+  final LocalStorageData localStorageData = Get.put(LocalStorageData());
   late final Rx<User?> firebaseUser;
 
   @override
@@ -89,7 +91,9 @@ class AuthController extends GetxController {
       await _firebaseAuth
           .signInWithEmailAndPassword(
               email: email!.trim(), password: password!.trim())
-          .then((value) => print(value));
+          .then((user) async {
+        saveUser(user);
+      });
     } on FirebaseAuthException catch (e) {
       String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;
       String message = '';
@@ -105,12 +109,26 @@ class AuthController extends GetxController {
   }
 
   void saveUser(UserCredential user) async {
-    await FireStoreUserServices().addUserToFireStore(UserModel(
+    UserModel userModel = UserModel(
       userId: user.user!.uid,
       email: user.user!.email,
       name: name ?? user.user!.displayName,
       pic: '',
-    ));
+    );
+    await FireStoreUserServices().addUserToFireStore(userModel);
+    setUser(userModel);
+  }
+
+  void getCurrentUserData({required String uid}) async {
+    await FireStoreUserServices().getCurrentUser(uid: uid).then(
+          (value) => setUser(
+            UserModel.fromJson(value.data() as Map<dynamic, dynamic>),
+          ),
+        );
+  }
+
+  void setUser(UserModel userModel) async {
+    await localStorageData.cacheUser(userModel: userModel);
   }
 
   SnackbarController snackBar(String snackBarTitle, String snackBarMessage) =>

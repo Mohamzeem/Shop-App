@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_getx_firebase/consts/colors.dart';
 import '../../../../core/controllers/view_controller.dart';
 
 class ControlScreen extends StatelessWidget {

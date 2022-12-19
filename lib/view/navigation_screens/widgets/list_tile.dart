@@ -16,23 +16,26 @@ class CustomListTile extends StatelessWidget {
   final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: kBlack,
-      ),
-      title: CustomText(
-        text: text,
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w400,
-        color: kBlack,
-      ),
-      trailing: IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          Icons.arrow_forward_ios,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.h),
+      child: ListTile(
+        leading: Icon(
+          icon,
           color: kBlack,
-          size: 20.r,
+        ),
+        title: CustomText(
+          text: text,
+          fontSize: 18.sp,
+          fontWeight: FontWeight.w400,
+          color: kBlack,
+        ),
+        trailing: IconButton(
+          onPressed: onPressed,
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            color: kBlack,
+            size: 20.r,
+          ),
         ),
       ),
     );

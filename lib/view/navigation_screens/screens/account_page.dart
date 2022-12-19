@@ -5,7 +5,6 @@ import 'package:shop_getx_firebase/consts/colors.dart';
 import 'package:shop_getx_firebase/view/widgets/custom_sized_box.dart';
 import 'package:shop_getx_firebase/view/widgets/custom_text.dart';
 import '../../../core/controllers/profile_accont_controller.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../widgets/list_tile.dart';
 
 class AccountScreen extends GetWidget<ProfileAccountController> {
@@ -24,21 +23,32 @@ class AccountScreen extends GetWidget<ProfileAccountController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 80.h,
-                  width: 80.w,
+                  height: 100.h,
+                  width: 100.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50.r),
-                      color: mainColor),
+                    borderRadius: BorderRadius.circular(50.r),
+                    color: mainColor,
+                    image: DecorationImage(
+                      image: controller.userModel == null
+                          ? const AssetImage('assets/avatar.png')
+                          : controller.userModel!.pic == 'default'
+                              ? const AssetImage('assets/avatar.png')
+                              : NetworkImage(
+                                      controller.userModel!.pic.toString())
+                                  as ImageProvider,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
                 Column(
-                  children: const [
+                  children: [
                     CustomText(
-                      text: 'Account Screen',
+                      text: "controller.userModel!.name!",
                       fontSize: 10,
                       fontWeight: FontWeight.w900,
                       color: kBlack,
                     ),
-                    CustomText(
+                    const CustomText(
                       text: 'Account Screen',
                       fontSize: 10,
                       fontWeight: FontWeight.w900,
